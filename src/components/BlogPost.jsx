@@ -6,12 +6,7 @@ import MarkdownRenderer from './MarkdownRenderer';
 import LikeButtonSandbox from './LikeButtonSandbox';
 import XssPlayground from './XssPlayground';
 
-import xssImage from './assets/blogs/heroImages/xss.jpg';
-import microserviceImage from './assets/blogs/heroImages/microservice.jpg';
-import cssBabiesImage from './assets/blogs/heroImages/css-for-babies.webp';
-import dockerImage from './assets/blogs/heroImages/docker.png';
-import overflowImage from './assets/blogs/heroImages/overflow.jpg';
-import gudetamaImage from './assets/blogs/heroImages/gudetama.webp';
+const heroImages = import.meta.glob('./assets/blogs/heroImages/*.{png,jpg,jpeg,webp}', { eager: true, import: 'default' });
 
 export default function BlogPost({ onNavigateToHome, initialPostId }) {
   // Load Markdown resources
@@ -259,20 +254,17 @@ export default function BlogPost({ onNavigateToHome, initialPostId }) {
 
   // Static images mapping for beautiful visual illustration matching post ids
   const getHeroImageSource = () => {
-    if (currentPostId === 'hackerone-reflected-xss') {
-      return xssImage;
-    }
-    if (currentPostId === 'like-button-distributed-systems') {
-      return microserviceImage;
-    }
-    if (currentPostId === 'rethinking-frontend-complexity') {
-      return cssBabiesImage;
-    }
-    if (currentPostId === 'chroot-containerization') {
-      return dockerImage;
-    }
-    if (currentPostId === 'art-of-exploitation') {
-      return overflowImage;
+    const pathMap = {
+      'hackerone-reflected-xss': 'xss.jpg',
+      'like-button-distributed-systems': 'microservice.jpg',
+      'rethinking-frontend-complexity': 'css-for-babies.webp',
+      'chroot-containerization': 'docker.png',
+      'art-of-exploitation': 'overflow.jpg',
+    };
+
+    const fileName = pathMap[currentPostId];
+    if (fileName) {
+        return heroImages[`./assets/blogs/heroImages/${fileName}`];
     }
  
     // other
@@ -841,7 +833,7 @@ export default function BlogPost({ onNavigateToHome, initialPostId }) {
                   </div>
                 </div>
                 <div className="mt-4 font-sans text-xs font-black text-rose-800 border-2 border-red-500 bg-red-100 p-2 border-dashed max-w-[280px]">
-                  💡 "Just use a WebP, Siddharth. No one will give you an award for drawing complex camera paths in CSS divs."
+                  💡 "Just use a WebP. No one will give you an award for drawing complex camera paths in CSS divs."
                 </div>
               </div>
             )}
@@ -1279,7 +1271,10 @@ export default function BlogPost({ onNavigateToHome, initialPostId }) {
 
           {/* Render loaded Markdown dynamically */}
           <div className="mt-8">
-            <MarkdownRenderer content={currentPost.content} customWidgets={blogWidgets} />
+            <MarkdownRenderer 
+            content={currentPost.content} 
+            customWidgets={blogWidgets} 
+          />
           </div>
           
 
@@ -1670,7 +1665,7 @@ export default function BlogPost({ onNavigateToHome, initialPostId }) {
             alt="Author portrait avatar" 
             referrerPolicy="no-referrer"
             className="w-24 h-24 object-cover border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] contrast-125" 
-            src={gudetamaImage} 
+            src={heroImages['./assets/blogs/heroImages/gudetama.webp']} 
           />
           <div>
             <h3 className="font-heading text-xl md:text-2xl font-black uppercase mb-2 tracking-tight">

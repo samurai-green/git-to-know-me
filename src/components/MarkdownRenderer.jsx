@@ -1,5 +1,22 @@
 import React from 'react';
 
+// Dynamically import all possible images
+const blogImages = import.meta.glob('../resources/blogs/assets/*.{png,jpg,jpeg,webp}', { eager: true, import: 'default' });
+const heroImages = import.meta.glob('./assets/blogs/heroImages/*.{png,jpg,jpeg,webp}', { eager: true, import: 'default' });
+
+const allImages = { ...blogImages, ...heroImages };
+
+// Create a mapping
+const imageMap = {};
+for (const [path, url] of Object.entries(allImages)) {
+    // Correctly map globed paths (relative) back to the paths used as strings
+    // `../resources/...` -> `src/resources/...`
+    // `./assets/...` -> `src/components/assets/...`
+    let key = path.replace(/^\.\.\/resources\//, 'src/resources/');
+    key = key.replace(/^\.\/assets\//, 'src/components/assets/');
+    imageMap[key] = url;
+}
+
 export default function MarkdownRenderer({ content, customWidgets }) {
   // Split lines to parse
   const lines = content.split('\n');
@@ -65,7 +82,10 @@ export default function MarkdownRenderer({ content, customWidgets }) {
     parsed = parsed.replace(/`(.*?)`/g, '<code class="bg-neutral-100 text-[#ca0055] px-1.5 py-0.5 font-mono text-xs border border-neutral-300 font-bold">$1</code>');
     
     // Inline image match: ![alt](url) -> formatted image tag
-    parsed = parsed.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" class="inline-block border-2 border-black max-w-full h-auto mx-auto my-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] bg-white p-1" referrerpolicy="no-referrer" />');
+    parsed = parsed.replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, url) => {
+        const finalUrl = imageMap[url] || url;
+        return `<img src="${finalUrl}" alt="${alt}" class="inline-block border-2 border-black max-w-full h-auto mx-auto my-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] bg-white p-1" referrerpolicy="no-referrer" />`;
+    });
     
     return parsed;
   };
@@ -129,11 +149,12 @@ export default function MarkdownRenderer({ content, customWidgets }) {
       const match = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
       if (match) {
         const [, alt, url] = match;
+        const finalUrl = imageMap[url] || url;
         renderedElements.push(
           <div key={`img-block-${index}`} className="my-8 flex justify-center">
             <figure className="border-4 border-black bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-3 inline-block max-w-full text-center animate-fade-in">
               <img 
-                src={url} 
+                src={finalUrl} 
                 alt={alt} 
                 className="border-2 border-black max-w-full h-auto select-none" 
                 referrerPolicy="no-referrer" 
