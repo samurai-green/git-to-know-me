@@ -1,0 +1,34 @@
+[
+  {
+    "id": "avionics",
+    "title": "avionics-stack",
+    "lang": "Rust",
+    "desc": "Critical flight-control SPSC ring buffer & telemetry router. Rewritten from legacy C++ for zero allocation safety.",
+    "stars": 1240,
+    "commits": 219
+  },
+  {
+    "id": "k8s-guard",
+    "title": "k8s-ephemeral-guard",
+    "lang": "Go",
+    "desc": "Real-time controller validating container footprints and automatically disassembling suspicious pods in microservices.",
+    "stars": 843,
+    "commits": 78
+  },
+  {
+    "id": "wal-sql",
+    "title": "secure-wal-postgres",
+    "lang": "PostgreSQL",
+    "desc": "Ultra low-latency custom WAL shipper validating cryptographically-signed partitions prior to commit syncs.",
+    "stars": 432,
+    "commits": 43
+  },
+  {
+    "id": "vm-sandbox",
+    "title": "kernel-malware-sandbox",
+    "lang": "Rust / C",
+    "desc": "Hardware-accelerated hypervisor disassembling kernel level drivers inside safe shadow page tables.",
+    "stars": 2105,
+    "commits": 341
+  }
+]
