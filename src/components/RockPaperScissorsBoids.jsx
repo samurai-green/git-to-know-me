@@ -5,7 +5,7 @@ const BEATS = { [TYPES.ROCK]: TYPES.SCISSORS, [TYPES.PAPER]: TYPES.ROCK, [TYPES.
 const COLORS = { [TYPES.ROCK]: '#f87171', [TYPES.PAPER]: '#38bdf8', [TYPES.SCISSORS]: '#a3e635' }; // Red, Blue, Lime
 
 const BOID_COUNT = 150; // Increased count
-const SPEED = 1.5;
+const SPEED = 1.2;
 const PERCEPTION_RADIUS = 50;
 
 class Boid {
