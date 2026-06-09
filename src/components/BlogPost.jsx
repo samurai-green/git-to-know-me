@@ -6,6 +6,13 @@ import MarkdownRenderer from './MarkdownRenderer';
 import LikeButtonSandbox from './LikeButtonSandbox';
 import XssPlayground from './XssPlayground';
 
+import xssImage from './assets/blogs/heroImages/xss.jpg';
+import microserviceImage from './assets/blogs/heroImages/microservice.jpg';
+import cssBabiesImage from './assets/blogs/heroImages/css-for-babies.webp';
+import dockerImage from './assets/blogs/heroImages/docker.png';
+import overflowImage from './assets/blogs/heroImages/overflow.jpg';
+import gudetamaImage from './assets/blogs/heroImages/gudetama.webp';
+
 export default function BlogPost({ onNavigateToHome, initialPostId }) {
   // Load Markdown resources
   const posts = loadBlogPosts();
@@ -253,19 +260,19 @@ export default function BlogPost({ onNavigateToHome, initialPostId }) {
   // Static images mapping for beautiful visual illustration matching post ids
   const getHeroImageSource = () => {
     if (currentPostId === 'hackerone-reflected-xss') {
-      return "src/components/assets/blogs/heroImages/xss.jpg";
+      return xssImage;
     }
     if (currentPostId === 'like-button-distributed-systems') {
-      return "src/components/assets/blogs/heroImages/microservice.jpg";
+      return microserviceImage;
     }
     if (currentPostId === 'rethinking-frontend-complexity') {
-      return "src/components/assets/blogs/heroImages/css-for-babies.webp";
+      return cssBabiesImage;
     }
     if (currentPostId === 'chroot-containerization') {
-      return "src/components/assets/blogs/heroImages/docker.png";
+      return dockerImage;
     }
     if (currentPostId === 'art-of-exploitation') {
-      return "src/components/assets/blogs/heroImages/overflow.jpg";
+      return overflowImage;
     }
  
     // other
@@ -1663,7 +1670,7 @@ export default function BlogPost({ onNavigateToHome, initialPostId }) {
             alt="Author portrait avatar" 
             referrerPolicy="no-referrer"
             className="w-24 h-24 object-cover border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] grayscale contrast-125" 
-            src="src/components/assets/blogs/heroImages/gudetama.webp" 
+            src={gudetamaImage} 
           />
           <div>
             <h3 className="font-heading text-xl md:text-2xl font-black uppercase mb-2 tracking-tight">
