@@ -34,7 +34,7 @@ export default function TopAppBar({ currentScreen, onNavigate, onContactClick })
       {/* Logo */}
       <div 
         onClick={handleLogoClick}
-        className={`text-2xl font-black text-black tracking-widest cursor-pointer select-none active:scale-95 transition-all flex items-center gap-2`}
+        className={`text-lg sm:text-lg md:text-2xl font-black text-black tracking-tight sm:tracking-widest cursor-pointer select-none active:scale-95 transition-all flex items-center gap-2 break-all`}
       >
         POMPEIIFRECKLES@DEV:/~
       </div>

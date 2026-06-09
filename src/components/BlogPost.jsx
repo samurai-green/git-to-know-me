@@ -1669,7 +1669,7 @@ export default function BlogPost({ onNavigateToHome, initialPostId }) {
           <img 
             alt="Author portrait avatar" 
             referrerPolicy="no-referrer"
-            className="w-24 h-24 object-cover border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] grayscale contrast-125" 
+            className="w-24 h-24 object-cover border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] contrast-125" 
             src={gudetamaImage} 
           />
           <div>
